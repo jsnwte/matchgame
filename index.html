@@ -11,35 +11,62 @@
     <header>
         <div><img src='logo.svg'></img></div>
         <div>
-            <span>Time </span><span id='timer'>3:20</span>
-            <br />
-            <span>Level </span><span id="level">1</span>
-            <br /><br />
-            <button id='newgame'>New Game</button>
-            <br /><br />
+            <p>Time <span id='timer'>3:20</span></p>
+            <p>Level <span id="level">1</span></p>
+            <p>Matches <span id="matches">0</span></p>
         </div>
     </header>
+    <div id="options">
+        <div>
+            <div id="newgameopt">
+                <p id="msg"></p>
+                <label>
+                    Level:
+                    <select id="levelopt">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </label>
+                <br /><br />
+                <label>
+                    Theme:
+                    <select id="themeopt">
+                        <option value="abc123">Alphanumeric</option>
+                    </select>
+                </label>
+            </div>
+            <button id='newgame'>New Game</button>
+        </div>
+    </div>
     <div id="board">
-        <div><span>1</span></div>
-        <div><span>2</span></div>
-        <div><span>3</span></div>
-        <div><span>4</span></div>
-        <div><span>5</span></div>
-        <div><span>6</span></div>
-        <div><span>7</span></div>
-        <div><span>8</span></div>
-        <div><span>9</span></div>
-        <div><span>10</span></div>
-        <div><span>11</span></div>
-        <div><span>12</span></div>
-        <div><span>13</span></div>
-        <div><span>14</span></div>
-        <div><span>15</span></div>
-        <div><span>16</span></div>
-        <div><span>17</span></div>
-        <div><span>18</span></div>
-        <div><span>19</span></div>
-        <div><span>20</span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
     </div>
 </body>
 </html>
