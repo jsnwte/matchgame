@@ -10,7 +10,7 @@ header {
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
-    margin: 0 auto;
+    margin: 10px auto 0 auto;
     background-color: rgb(48, 43, 17);
 }
 header p {
@@ -26,7 +26,7 @@ header p {
     grid-template-columns: repeat(4, 100px);
     gap: 5px;
     padding: 5px;
-    margin: 0 auto;
+    margin: 5px auto 0 auto;
     justify-content: center;
 }
 #board > div {
@@ -81,7 +81,8 @@ header p {
     font-weight: bold;
 }
 #options #newgameopt #msg {
-    display: none; /* So new game options can be displayed initially on page load */
+    display: none; /* So only new game options are displayed on page load */
+    text-align: center;
 }
 #options #newgame {
     position: absolute;

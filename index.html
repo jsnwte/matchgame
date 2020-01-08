@@ -6,67 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Match Game</title>
     <link rel="stylesheet" href="index.css">
+    <script defer src="index.js"></script>
 </head>
 <body>
     <header>
         <div><img src='logo.svg'></img></div>
         <div>
-            <p>Time <span id='timer'>3:20</span></p>
-            <p>Level <span id="level">1</span></p>
-            <p>Matches <span id="matches">0</span></p>
+            <p>Time: <span id='timer'></span></p>
+            <p>Level: <span id="level"></span></p>
+            <p>Matches: <span id="matches"></span></p>
         </div>
     </header>
     <div id="options">
         <div>
             <div id="newgameopt">
                 <p id="msg"></p>
-                <label>
-                    Level:
-                    <select id="levelopt">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                </label>
+                <label>Level: <select id="levelopt"></select></label>
                 <br /><br />
-                <label>
-                    Theme:
-                    <select id="themeopt">
-                        <option value="abc123">Alphanumeric</option>
-                    </select>
-                </label>
+                <label>Theme: <select id="themeopt"></select></label>
             </div>
-            <button id='newgame'>New Game</button>
+            <button id="newgame">New Game</button>
         </div>
     </div>
-    <div id="board">
-        <div><span></span></div>
-        <div><span></span></div>
-        <div><span></span></div>
-        <div><span></span></div>
-        <div><span></span></div>
-        <div><span></span></div>
-        <div><span></span></div>
-        <div><span></span></div>
-        <div><span></span></div>
-        <div><span></span></div>
-        <div><span></span></div>
-        <div><span></span></div>
-        <div><span></span></div>
-        <div><span></span></div>
-        <div><span></span></div>
-        <div><span></span></div>
-        <div><span></span></div>
-        <div><span></span></div>
-        <div><span></span></div>
-        <div><span></span></div>
-    </div>
+    <div id="board"></div>
 </body>
 </html>
