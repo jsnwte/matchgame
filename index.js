@@ -1,4 +1,4 @@
-const levels = [200, 180, 160, 140, 120, 100, 80, 60, 40, 20]; // 10 levels in 20 second decrements
+const levels = [300, 270, 240, 210, 180, 150, 120, 90, 60, 30]; // 10 levels in 30 second decrements
 const themes = ["Alpha", "Alphanumeric"];
 const board = document.querySelector("#board");
 const options = document.querySelector("#options");
@@ -21,73 +21,77 @@ document.querySelector("#newgame").onclick = () => {
         }
         levelopt.focus();
     } else { // options selected, start the new game
-        let choices = [];
-        let pieces = [];
-        let randomPiece;
-        let randomChoice;
-        let newDiv; // piece container
-        let newSpan; // piece content
-
         matches.innerText = 0;
         level.innerText = levelopt.value;
-        seconds = levels[Number(level.innerText) - 1];
-        setTimer();
-
-        // Get theme choices
-        switch(Number(themeopt.value)) {
-            case 0: // Alpha
-                for (i = 65; i < 91; i++) {
-                    choices.push(String.fromCharCode(i));
-                }
-                break;
-            case 1: // Alphanumeric
-                for (i = 65; i < 91; i++) {
-                    choices.push(String.fromCharCode(i));
-                }
-                for (i = 0; i < 10; i++) {
-                    choices.push(i.toString());
-                }
-                break;
-            default:
-                // placeholder for future themes
-        }
-
-        while (board.firstChild) {
-            board.removeChild(board.firstChild);
-        }
-
-        for (i = 1; i < 21; i++) {
-            pieces.push(i);
-            newDiv = document.createElement("div");
-            newSpan = document.createElement("span");
-            newDiv.setAttribute("piece", newSpan.innerText = i);
-            newDiv.appendChild(newSpan);
-            board.appendChild(newDiv);
-            newDiv.onclick = clickPiece;
-        }
-
-        // Randomly assign theme choices to pieces
-        while (pieces.length > 0) {
-            if (pieces.length > 2) {
-                randomChoice = Math.floor(Math.random() * choices.length);
-                randomPiece = Math.floor(Math.random() * pieces.length);
-                board.children[pieces[randomPiece] - 1].setAttribute("value", choices[randomChoice]);
-                pieces.splice(randomPiece, 1);
-                randomPiece = Math.floor(Math.random() * pieces.length);
-                board.children[pieces[randomPiece] - 1].setAttribute("value", choices[randomChoice]);
-                pieces.splice(randomPiece, 1);
-                choices.splice(randomChoice, 1);
-            } else {
-                randomChoice = Math.floor(Math.random() * choices.length);
-                board.children[pieces[0] - 1].setAttribute("value", choices[randomChoice]);
-                board.children[pieces[1] - 1].setAttribute("value", choices[randomChoice]);
-                pieces.splice(0, 2);
-            }
-        }
-
+        newGame();
         options.style.display = "none";
-        clock = setInterval(setTimer, 1000);
     }
+}
+
+function newGame() {
+    let choices = [];
+    let pieces = [];
+    let randomPiece;
+    let randomChoice;
+    let newDiv; // piece container
+    let newSpan; // piece content
+
+    seconds = levels[Number(level.innerText) - 1];
+    setTimer();
+
+    // Get theme choices
+    switch(Number(themeopt.value)) {
+        case 0: // Alpha
+            for (i = 65; i < 91; i++) {
+                choices.push(String.fromCharCode(i));
+            }
+            break;
+        case 1: // Alphanumeric
+            for (i = 65; i < 91; i++) {
+                choices.push(String.fromCharCode(i));
+            }
+            for (i = 0; i < 10; i++) {
+                choices.push(i.toString());
+            }
+            break;
+        default:
+            // placeholder for future themes
+    }
+
+    while (board.firstChild) {
+        board.removeChild(board.firstChild);
+    }
+
+    for (i = 1; i < 21; i++) {
+        pieces.push(i);
+        newDiv = document.createElement("div");
+        newSpan = document.createElement("span");
+        newDiv.setAttribute("piece", newSpan.innerText = i);
+        newDiv.appendChild(newSpan);
+        board.appendChild(newDiv);
+        newDiv.onclick = clickPiece;
+    }
+
+    // Randomly assign theme choices to pieces
+    while (pieces.length > 0) {
+        if (pieces.length > 2) {
+            randomChoice = Math.floor(Math.random() * choices.length);
+            randomPiece = Math.floor(Math.random() * pieces.length);
+            board.children[pieces[randomPiece] - 1].setAttribute("value", choices[randomChoice]);
+            pieces.splice(randomPiece, 1);
+            randomPiece = Math.floor(Math.random() * pieces.length);
+            board.children[pieces[randomPiece] - 1].setAttribute("value", choices[randomChoice]);
+            pieces.splice(randomPiece, 1);
+            choices.splice(randomChoice, 1);
+        } else {
+            randomChoice = Math.floor(Math.random() * choices.length);
+            board.children[pieces[0] - 1].setAttribute("value", choices[randomChoice]);
+            board.children[pieces[1] - 1].setAttribute("value", choices[randomChoice]);
+            pieces.splice(0, 2);
+        }
+    }
+
+    clock = setInterval(setTimer, 1000);
 }
 
 function clickPiece(e) {
@@ -100,12 +104,66 @@ function clickPiece(e) {
         div = e.target.parentNode; span = e.target;
     }
 
-    if (div.getAttribute("matched") === null) {
+    // Run only if piece wasn't previously matched or selected as the choice
+    if (div.getAttribute("matched") === null && choice != div) {
+        // Display content correctly based on theme
+        switch (Number(themeopt.value)) {
+            case 0: // Alpha
+            case 1: // Alphanumeric
+                span.innerText = div.getAttribute("value");
+                break;
+            default:
+                // placeholder for future themes
+        }
+
         if (choice === "" || choice === undefined) {
-            choice = div.getAttribute("piece");
+            choice = div;
+            div.style.border = "1.5px solid blue";
+        } else if (choice.getAttribute("value") === div.getAttribute("value")) {
+            matches.innerText = Number(matches.innerText) + 1;
+            choice.setAttribute("matched", "");
+            choice.style.backgroundColor = "rgb(136, 115, 9)";
+            choice.style.border = "none";
+            choice.firstChild.style.color = "rgb(48, 43, 17)";
+            choice = "";
+
+            div.setAttribute("matched", "");
+            div.style.backgroundColor = "rgb(136, 115, 9)";
+            span.style.color = "rgb(48, 43, 17)";
+        } else {
+            setTimeout(hidePieces, 1000, choice, div);
+            div.style.border = choice.style.border = "1.5px solid red";
+            choice = "";
         }
     }
 
+    // Advance to the next level or end game if player has won
+    if (Number(levelopt.value) * Number(matches.innerText) === Number(level.innerText) * (board.children.length / 2) || Number(matches.innerText) === Number(level.innerText) * (board.children.length / 2)) {
+        clearInterval(clock);
+        if (Number(levelopt.value) * Number(matches.innerText) === levels.length * (board.children.length / 2) || Number(matches.innerText) === levels.length * (board.children.length / 2)) {
+            for (i = 0; i < newgameopt.length; i++) {
+                newgameopt[i].style.display = "none";
+            }
+            msg.innerText = "Game over, you won!";
+            msg.style.display = "block";
+            options.style.display = "block";
+        } else {
+            level.innerText = Number(level.innerText) + 1;
+            newGame();
+        }
+    }
+}
+
+function hidePieces(first, second) {
+    // Player guessed wrong. Reset the clicked pieces if player hasn't since reslected them as a new choice or matched them with something else
+    if (first != choice && first.getAttribute("matched") === null) {
+        first.firstChild.innerText = first.getAttribute("piece");
+        first.style.border = "none";
+    }
+    if (second != choice && second.getAttribute("matched") === null) {
+        second.firstChild.innerText = second.getAttribute("piece");
+        second.style.border = "none";
+    }
 }
 
 function setTimer() {
