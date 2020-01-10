@@ -13,8 +13,16 @@ let clock; // timer ref running setTimer() every second to update level time
 let seconds; // tracking time left in level
 let choice; // ref for first piece player clicks during gameplay
 
+document.querySelector("#about").onclick = () => {
+    document.querySelector("#about").style.display = "none";
+    msg.style.textAlign = "left";
+    showMsg("Can you match all pieces on the board before time runs out? Select from " + themes.length + " themes and " + levels.length + " levels of matching fun. This game was developed by Justin White using HTML, CSS, Javascript, Flexbox, and Grid. Check out the code on <a target='_blank' href='https://github.com/jsnwte/matchgame'>GitHub</a>.");
+}
+
 document.querySelector("#newgame").onclick = () => {
+    msg.style.textAlign = "center";
     if (msg.style.display != "none" && msg.innerText != "") { // msg is showing, hide and show new game options
+        document.querySelector("#about").style.display = "inline";
         msg.style.display = "none";
         for (i = 0; i < newgameopt.length; i++) {
             newgameopt[i].style.display = "inline";
@@ -26,6 +34,15 @@ document.querySelector("#newgame").onclick = () => {
         newGame();
         options.style.display = "none";
     }
+}
+
+function showMsg(message) {
+    for (i = 0; i < newgameopt.length; i++) {
+        newgameopt[i].style.display = "none";
+    }
+    msg.innerHTML = message;
+    msg.style.display = "block";
+    options.style.display = "block";
 }
 
 function newGame() {
@@ -142,12 +159,7 @@ function clickPiece(e) {
     if (Number(levelopt.value) * Number(matches.innerText) === Number(level.innerText) * (board.children.length / 2) || Number(matches.innerText) === Number(level.innerText) * (board.children.length / 2)) {
         clearInterval(clock);
         if (Number(levelopt.value) * Number(matches.innerText) === levels.length * (board.children.length / 2) || Number(matches.innerText) === levels.length * (board.children.length / 2)) {
-            for (i = 0; i < newgameopt.length; i++) {
-                newgameopt[i].style.display = "none";
-            }
-            msg.innerText = "Game over, you won!";
-            msg.style.display = "block";
-            options.style.display = "block";
+            showMsg("Game over, you won!");
         } else {
             level.innerText = Number(level.innerText) + 1;
             newGame();
@@ -179,12 +191,7 @@ function setTimer() {
     if (seconds < 0) {
         // game over, player didn't complete the board in time
         clearInterval(clock);
-        for (i = 0; i < newgameopt.length; i++) {
-            newgameopt[i].style.display = "none";
-        }
-        msg.innerText = "Game over, ran out of time!";
-        msg.style.display = "block";
-        options.style.display = "block";
+        showMsg("Game over, ran out of time!");
     }
 }
 

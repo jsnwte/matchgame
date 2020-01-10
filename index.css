@@ -30,6 +30,11 @@ header p {
     background-color: rgb(71, 63, 21);
 }
 
+.buttonStyle2 {
+    font-size: 1.25rem;
+    padding: 10px;
+}
+
 /* Game board and board pieces */
 #board {
     display: grid;
@@ -68,7 +73,7 @@ header p {
     top: 25%;
     left: 50%;
     transform: translate(-50%, -25%);
-    height: 200px;
+    height: 280px;
     width: 300px;
     margin: auto;
     background-color: rgba(20, 18, 3, 0.8);
@@ -86,12 +91,14 @@ header p {
 }
 #options #newgameopt #msg {
     display: none; /* So only new game options are displayed on page load */
-    text-align: center;
 }
 #options #newgame {
     position: absolute;
     bottom: 10px;
     right: 10px;
-    font-size: 1.25rem;
-    padding: 10px;
+}
+#options #about {
+    position: absolute;
+    bottom: 10px;
+    right: 140px;
 }
