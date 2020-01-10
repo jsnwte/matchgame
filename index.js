@@ -67,6 +67,7 @@ function newGame() {
         newDiv = document.createElement("div");
         newSpan = document.createElement("span");
         newDiv.setAttribute("piece", newSpan.innerText = i);
+        newDiv.setAttribute("class", "buttonStyle");
         newDiv.appendChild(newSpan);
         board.appendChild(newDiv);
         newDiv.onclick = clickPiece;

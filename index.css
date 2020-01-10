@@ -20,6 +20,16 @@ header p {
     line-height: 0;
 }
 
+.buttonStyle {
+    background-color: rgb(48, 43, 17);
+    color: rgb(136, 115, 9);
+    font-weight: bold;
+    border: none;
+}
+.buttonStyle:hover {
+    background-color: rgb(71, 63, 21);
+}
+
 /* Game board and board pieces */
 #board {
     display: grid;
@@ -33,10 +43,6 @@ header p {
     position: relative;
     height: 100px;
     width: 100px;
-    background-color: rgb(48, 43, 17);
-}
-#board > div:hover {
-    background-color: rgb(71, 63, 21);
 }
 #board > div > span {
     position: absolute;
@@ -45,8 +51,6 @@ header p {
     transform: translate(-50%, -50%);
     font-size: 2rem;
     user-select: none;
-    color: rgb(136, 115, 9);
-    font-weight: bold;
 }
 
 /* Options dialog */
@@ -88,13 +92,6 @@ header p {
     position: absolute;
     bottom: 10px;
     right: 10px;
-    color: rgb(136, 115, 9);
-    background-color: rgb(48, 43, 17);
-    border: none;
     font-size: 1.25rem;
-    font-weight: bold;
     padding: 10px;
-}
-#options #newgame:hover {
-    background-color: rgb(71, 63, 21);
 }
