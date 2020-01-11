@@ -1,5 +1,5 @@
 const levels = [300, 270, 240, 210, 180, 150, 120, 90, 60, 30]; // 10 levels in 30 second decrements
-const themes = ["Alpha", "Alphanumeric"];
+const themes = ["Colors", "Alpha", "Alphanumeric"];
 const board = document.querySelector("#board");
 const options = document.querySelector("#options");
 const msg = document.querySelector("#msg");
@@ -58,12 +58,15 @@ function newGame() {
 
     // Get theme choices
     switch(Number(themeopt.value)) {
-        case 0: // Alpha
+        case 0: // Colors
+            choices = ["blue", "yellow", "green", "orange", "gray", "black", "white", "red", "purple", "pink"];
+            break;
+        case 1: // Alpha
             for (i = 65; i < 91; i++) {
                 choices.push(String.fromCharCode(i));
             }
             break;
-        case 1: // Alphanumeric
+        case 2: // Alphanumeric
             for (i = 65; i < 91; i++) {
                 choices.push(String.fromCharCode(i));
             }
@@ -126,8 +129,12 @@ function clickPiece(e) {
     if (div.getAttribute("matched") === null && choice != div) {
         // Display content correctly based on theme
         switch (Number(themeopt.value)) {
-            case 0: // Alpha
-            case 1: // Alphanumeric
+            case 0: // Colors
+                span.style.backgroundColor = div.getAttribute("value");
+                span.innerText = div.getAttribute("value");
+                break;
+            case 1: // Alpha
+            case 2: // Alphanumeric
                 span.innerText = div.getAttribute("value");
                 break;
             default:
@@ -171,10 +178,12 @@ function hidePieces(first, second) {
     // Player guessed wrong. Reset the clicked pieces if player hasn't since reslected them as a new choice or matched them with something else
     if (first != choice && first.getAttribute("matched") === null) {
         first.firstChild.innerText = first.getAttribute("piece");
+        first.firstChild.style.backgroundColor = "inherit";
         first.style.border = "none";
     }
     if (second != choice && second.getAttribute("matched") === null) {
         second.firstChild.innerText = second.getAttribute("piece");
+        second.firstChild.style.backgroundColor = "inherit";
         second.style.border = "none";
     }
 }
