@@ -1,5 +1,5 @@
 const levels = [300, 270, 240, 210, 180, 150, 120, 90, 60, 30]; // 10 levels in 30 second decrements
-const themes = ["Colors", "Alpha", "Alphanumeric"];
+const themes = ["Colors", "Alpha", "Alphanumeric", "Technology"];
 const board = document.querySelector("#board");
 const options = document.querySelector("#options");
 const msg = document.querySelector("#msg");
@@ -74,6 +74,11 @@ function newGame() {
                 choices.push(i.toString());
             }
             break;
+        case 3: // Technology
+            for (i = 1; i < 33; i++) {
+                choices.push("themes/Technology/" + i.toString() + ".png");
+            }
+            break;
         default:
             // placeholder for future themes
     }
@@ -137,8 +142,8 @@ function clickPiece(e) {
             case 2: // Alphanumeric
                 span.innerText = div.getAttribute("value");
                 break;
-            default:
-                // placeholder for future themes
+            default: // Technology
+                span.innerHTML = "<img src='" + div.getAttribute("value") + "' width='50px' height='50px'>";
         }
 
         if (choice === "" || choice === undefined) {
